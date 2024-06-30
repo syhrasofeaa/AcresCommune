@@ -5,7 +5,7 @@
  */
 package equipments.controller;
 
-import equipments.bean.UpdateEquipmentBean;
+import equipments.bean.EquipmentBean;
 import util.DBConnection;
 
 import java.io.IOException;
@@ -52,7 +52,7 @@ public class UpdateEquipmentServlet extends HttpServlet {
                 rs = stmt.executeQuery();
 
                 // Initialize a ReadProfileBean object to hold the data
-                UpdateEquipmentBean updateequipmentBean = new UpdateEquipmentBean();
+                EquipmentBean updateequipmentBean = new EquipmentBean();
 
                 if (rs.next()) {
                     // Set data to the ReadProfileBean object

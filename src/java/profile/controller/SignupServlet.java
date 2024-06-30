@@ -10,7 +10,7 @@
  */
 package profile.controller;
 
-import profile.bean.SignupBean;
+import profile.bean.ProfileBean;
 import util.DBConnection;
 
 
@@ -45,7 +45,7 @@ public class SignupServlet extends HttpServlet {
             return;
         }
         
-        SignupBean signupBean = new SignupBean();
+        ProfileBean signupBean = new ProfileBean();
         signupBean.setUsername(username);
         signupBean.setPassword(password);
         signupBean.setName(fullname);
@@ -63,7 +63,7 @@ public class SignupServlet extends HttpServlet {
         }
     }
 
-    private String registerUser(SignupBean signupBean) {
+    private String registerUser(ProfileBean signupBean) {
         String fullName = signupBean.getName();
         String email = signupBean.getEmail();
         String userName = signupBean.getUsername();

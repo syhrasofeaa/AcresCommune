@@ -7,16 +7,20 @@ package profile.bean;
 
 /**
  *
- * @author user
+ * @author syahira sofea
  */
-public class UpdateProfileBean {
+
+import java.io.Serializable;
+
+public class ProfileBean implements Serializable{
+    
     private String farmerID;
     private String username;
     private String password;
     private String email;
     private String name;
-    
-    public UpdateProfileBean () {
+
+    public ProfileBean () {
         this.farmerID = "";
         this.username = "";
         this.password = "";
@@ -24,7 +28,7 @@ public class UpdateProfileBean {
         this.name = "";
     }
 
-    public UpdateProfileBean(String farmerID, String username, String password, String email, String name) {
+    public ProfileBean(String username, String password, String email, String name, String farmerID) {
         this.farmerID = farmerID;
         this.username = username;
         this.password = password;
@@ -36,13 +40,13 @@ public class UpdateProfileBean {
         return farmerID;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public String getPassword() {
         return password;
     }
+
+    public String getUsername() {
+        return username;
+    }    
 
     public String getEmail() {
         return email;
@@ -55,6 +59,7 @@ public class UpdateProfileBean {
     public void setFarmerID(String farmerID) {
         this.farmerID = farmerID;
     }
+    
 
     public void setUsername(String username) {
         this.username = username;
@@ -73,5 +78,4 @@ public class UpdateProfileBean {
     }
     
     
-
 }

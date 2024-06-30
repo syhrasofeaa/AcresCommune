@@ -5,6 +5,7 @@
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="equipments.bean.EquipmentBean" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -29,32 +30,27 @@
 </nav>
     <main>
     <h1>Create Equipment</h1>
-    <form action="CreateTaskServlet" method="post">
+    <form action="CreateEquipmentServlet" method="post">
         <table>
             <tbody>
-                <tr>
-                    <td><label for="equipmentID">Equipment ID:</label></td>
-                    <td><input type="text" id="equipmentId" name="equipmentId" required></td>
-                </tr>
                 <tr>
                     <td><label for="equipmentName">Equipment Name:</label></td>
                     <td><input type="text" id="equipmentName" name="equipmentName" required></td>
                 </tr>
                 <tr>
-                    <td><label for="equipmentCondition">Equipment Condition:</label></td>
-                    <td><textarea id="equipmentCondition" name="equipmentCondition" rows="4" cols="50" required></textarea></td>
+                    <td><label for="equipmentCondition">Equipment Condition</label></td>
+                    <td>
+                        <select id="equipmentCondition" name="equipmentCondition" required>
+                            <option value="Poor">Poor</option>
+                            <option value="Fair">Fair</option>
+                            <option value="Good">Good</option>
+                            <option value="Excellent">Excellent</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td><label for="dueDate">Used Date:</label></td>
                     <td><input type="date" id="usedDate" name="usedDate" required></td>
-                </tr>
-                <tr>
-                    <td><input type="hidden" id="farmerId" name="farmerId" value="<%= session.getAttribute("username") %>"></td>
-                    <!-- Assuming "username" is the attribute storing the logged-in user's farmer ID -->
-                </tr>
-                <tr>
-                    <td><input type="hidden" id="farmId" name="farmId" value="<%= session.getAttribute("farmId") %>"></td>
-                    <!-- Assuming "farmId" is the attribute storing the farm ID -->
                 </tr>
             </tbody>
         </table>

@@ -4,15 +4,9 @@
     Author     : user
 --%>
 
-<%-- 
-    Document   : updateprofile
-    Created on : Jun 29, 2024, 10:10:11 PM
-    Author     : user
---%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="profile.bean.ReadProfileBean" %>
-<%@ page import="tasks.bean.UpdateTaskBean" %>
+<%@ page import="tasks.bean.TaskBean" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -34,104 +28,64 @@
     <a href="aboutus.html">About Us</a>
     <a href="logout.jsp">Logout</a>
 </nav>
-
-    <main>
-        <div class="task-container">
-            <h1>Read Profile</h1>
-            <form id="ReadTask" action="UpdateTaskServlet" method="get"> <!-- Form for refreshing data -->
-<script>
-    // Function to submit the form
-    function submitForm() {
-        document.getElementById("ReadTask").submit();
-    }
-
-    // Check if page is opened for the first time using session storage
-    if (sessionStorage.getItem("firstLoad") === null) {
-        // Set session storage to mark the page as loaded
-        sessionStorage.setItem("firstLoad", "true");
-
-        // Execute when the page is opened for the first time
-        window.onload = function() {
-            submitForm();
-        }; 
-    } else if (performance.navigation.type === 1) {
-        // Reload the page normally when refreshed
-        window.onload = function() {
-            submitForm();
-        };
-    }
-</script>
-                <input type="hidden" name="action" value="load">
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Farmer ID</th>
-                        <td>${updatetaskBean.farmerID}</td>
-                    </tr>
-                    <tr>
-                        <th>Task ID</th>
-                        <td>${updatetaskBean.TaskID}</td>
-                    </tr>
-                    <tr>
-                        <th>Task Name</th>
-                        <td>${updatetaskBean.TaskName}</td>
-                    </tr>
-                    <tr>
-                        <th>Task Desc</th>
-                        <td>${updatetaskBean.TaskDesc}</td>
-                    </tr>
-                    <tr>
-                        <th>Assigned To</th>
-                        <td>${updatetaskBean.AssignedTo}</td>
-                    </tr>
-                    <tr>
-                        <th>Due Date</th>
-                        <td>${updatetaskBean.DueDate}</td>
-                    </tr>
-                    <tr>
-                        <th>Task Status</th>
-                        <td>${updatetaskBean.TaskStatus}</td>
-                    </tr>
-                </tbody>
-            </table>
-             </form>
-
-                    <div class="update-container">    <!-- Form for updating profile data (POST) -->
-        <form id="UpdateProfileForm" action="UpdateTaskServlet" method="post">
-            <input type="hidden" name="farmerID" value="${profileBean.farmerID}">
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Name</th>
-                        <td>
-                            <input type="text" name="fullName" value="" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Password</th>
-                        <td>
-                            <input type="password" name="Password" value="" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>
-                            <input type="email" name="Email" value="" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Username</th>
-                        <td>
-                            <input type="text" name="Username" value="" required>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button type="submit">Update Task</button>
-        </form>
+ <main>
+    <div class="update-container">
+            <h1>Update Task</h1>
+            <%
+                TaskBean view = (TaskBean) request.getAttribute("viewTaskBean");
+                if (view != null) {
+            %>
+            <form action="UpdateTaskServlet" method="post">
+         
+                <input type="hidden" name="taskID" value="<%=view.getTaskID()%>">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><label for="taskID">Task ID:</label></td>
+                            <td><input type="text" id="taskID" name="taskID" value="<%=view.getTaskID()%>" readonly></td>
+                        </tr>
+                        <tr>
+                            <td><label for="taskName">Task Name:</label></td>
+                            <td><input type="text" id="taskName" name="taskName" value="<%=view.getTaskID()%>" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="taskDesc">Task Description:</label></td>
+                            <td><textarea id="taskDesc" name="taskDesc" rows="4" cols="50" required><%=view.getTaskDesc()%></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><label for="dueDate">Due Date:</label></td>
+                            <td><input type="date" id="dueDate" name="dueDate" value="<%=view.getDueDate()%>" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="status">Status:</label></td>
+                            <td>
+                                <select id="status" name="status" required>
+                                    <option value="Pending" <%= "Pending".equals(view.getTaskStatus()) ? "selected" : "" %>>Pending</option>
+                                     <option value="Completed" <%= "Completed".equals(view.getTaskStatus()) ? "selected" : "" %>>Completed</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                    
+                </table>
+                               
+                <div class="update-buttons">
+                <button type="submit">Update Task</button>
+            <button onclick="window.location.href = 'createtask.jsp'">Create Task</button>
+            <button onclick="window.location.href = 'readtask.jsp'">View Task</button>
+            <button onclick="window.location.href = 'deletetask.jsp'">Delete Task</button> <%--servlet je tapi nanti display ayat dah takda data, ada jsp tapi sikit je hujung2 boleh buat--%>
+            </div>
+            </form>
+       <%
+                } else {
+            %>
+            <p>Information not found.</p>
+            <%
+                }
+            %>
     </div>
-        </div>
-    </main>
+</main>
 
 <footer>
     <p>&copy; 2024 Community Farming Management System. All rights reserved.</p>

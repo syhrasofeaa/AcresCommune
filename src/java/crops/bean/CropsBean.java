@@ -12,14 +12,14 @@ package crops.bean;
 
 import java.io.Serializable;
 
-public class ReadCropsBean implements Serializable {
+public class CropsBean implements Serializable {
     private String cropID;
     private String cropName;
     private String cropType;
     private String plantingDate;
     private String harvestDate;
     
-    public ReadCropsBean() {
+    public CropsBean() {
         this.cropID = "";
         this.cropName = "";
         this.cropType = "";
@@ -27,7 +27,7 @@ public class ReadCropsBean implements Serializable {
         this.harvestDate = "";
     }
 
-    public ReadCropsBean(String cropID, String cropName, String cropType, String plantingDate, String harvestDate) {
+    public CropsBean(String cropID, String cropName, String cropType, String plantingDate, String harvestDate) {
         this.cropID = cropID;
         this.cropName = cropName;
         this.cropType = cropType;

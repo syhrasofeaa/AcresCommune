@@ -5,7 +5,7 @@
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="profile.bean.ReadProfileBean" %>
+<%@ page import="profile.bean.ProfileBean" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -59,31 +59,31 @@
                 <tbody>
                     <tr>
                         <th>Farmer ID</th>
-                        <td>${profileBean.farmerID}</td>
+                        <td>${readprofileBean.farmerID}</td>
                     </tr>
                     <tr>
                         <th>Name</th>
-                        <td>${profileBean.name}</td>
+                        <td>${readprofileBean.name}</td>
                     </tr>
                     <tr>
                         <th>Password</th>
-                        <td>${profileBean.password}</td>
+                        <td>${readprofileBean.password}</td>
                     </tr>
                     <tr>
                         <th>Email</th>
-                        <td>${profileBean.email}</td>
+                        <td>${readprofileBean.email}</td>
                     </tr>
                     <tr>
                         <th>Username</th>
-                        <td>${profileBean.username}</td>
+                        <td>${readprofileBean.username}</td>
                     </tr>
                 </tbody>
             </table>
              </form>
 
-                    <div class="update-container">    <!-- Form for updating profile data (POST) -->
-        <form id="UpdateProfileForm" action="UpdateProfileServlet" method="post">
-            <input type="hidden" name="farmerID" value="${profileBean.farmerID}">
+         <div class="update-container">    <!-- Form for updating profile data (POST) -->
+        <form action="UpdateProfileServlet" method="post">
+            
             <table>
                 <tbody>
                     <tr>

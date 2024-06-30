@@ -5,6 +5,7 @@
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="crops.bean.CropsBean" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -29,36 +30,37 @@
 </nav>
     <main>
     <h1>Create Crop</h1>
-    <form action="CreateTaskServlet" method="post">
+    <form action="CreateCropsServlet" method="post">
         <table>
             <tbody>
-                <tr>
-                    <td><label for=cropId">Crop ID:</label></td>
-                    <td><input type="text" id="cropId" name="cropId" required></td>
-                </tr>
                 <tr>
                     <td><label for="cropName">Crop Name:</label></td>
                     <td><input type="text" id="cropName" name="cropName" required></td>
                 </tr>
                 <tr>
                     <td><label for="cropType">Crop Type</label></td>
-                    <td><textarea id="cropType" name="cropType" rows="4" cols="50" required></textarea></td>
+                    <td>
+                        <select id="cropType" name="cropType" required>
+                            <option value="Grain">Grain</option>
+                            <option value="Vegetable">Vegetable</option>
+                            <option value="Legume">Legume</option>
+                            <option value="Root">Root</option>
+                            <option value="Fruit">Fruit</option>
+                            <option value="Nuts">Nuts</option>
+                            <option value="Seeds">Seeds</option>
+                            <option value="Fibers">Fibers</option>
+                            <option value="Spices">Spices</option>
+                            <option value="Plants">Plants</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
-                    <td><label for="plantingDate">Due Date:</label></td>
+                    <td><label for="plantingDate">Planting Date:</label></td>
                     <td><input type="date" id="plantingDate" name="plantingDate" required></td>
                 </tr>
                 <tr>
-                    <td><label for=harvestDate">Due Date:</label></td>
+                    <td><label for=harvestDate">Harvest Date:</label></td>
                     <td><input type="date" id="harvestDate" name="harvestDate" required></td>
-                </tr>
-                <tr>
-                    <td><input type="hidden" id="farmerId" name="farmerId" value="<%= session.getAttribute("username") %>"></td>
-                    <!-- Assuming "username" is the attribute storing the logged-in user's farmer ID -->
-                </tr>
-                <tr>
-                    <td><input type="hidden" id="farmId" name="farmId" value="<%= session.getAttribute("farmId") %>"></td>
-                    <!-- Assuming "farmId" is the attribute storing the farm ID -->
                 </tr>
             </tbody>
         </table>

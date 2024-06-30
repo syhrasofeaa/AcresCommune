@@ -10,7 +10,7 @@
  */
 package tasks.controller;
 
-import tasks.bean.ReadTaskBean;
+import tasks.bean.TaskBean;
 import util.DBConnection;
 
 import java.io.IOException;
@@ -43,14 +43,14 @@ public class ReadTaskServlet extends HttpServlet {
                 conn = DBConnection.createConnection(); // Assuming DBConnection class is implemented
 
                 String readQuery = "SELECT T.TASKID, T.TASKNAME, T.TASKDESC, T.DUEDATE, T.STATUS " +
-                                   "FROM TASK T INNER JOIN FARMER F ON T.FARMERID = F.FARMERID WHERE F.FARMERUSERNAME = ?";
+                                   "FROM TASK T INNER JOIN FARMER FR ON T.FARMERID = FR.FARMERID WHERE FR.FARMERUSERNAME = ?";
                 
                 stmt = conn.prepareStatement(readQuery);
                 stmt.setString(1, farmerUsername);
 
                 rs = stmt.executeQuery();
                 
-                ReadTaskBean readtaskBean = new ReadTaskBean();
+                TaskBean readtaskBean = new TaskBean();
                 if (rs.next()) {
                     
                     readtaskBean.setTaskID(rs.getString("TASKID"));

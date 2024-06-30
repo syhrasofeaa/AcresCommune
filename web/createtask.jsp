@@ -5,6 +5,7 @@
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="tasks.bean.TaskBean" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -31,10 +32,6 @@
     <form action="CreateTaskServlet" method="post">
         <table>
             <tbody>
-                <tr>
-                    <td><label for="taskId">Task ID:</label></td>
-                    <td><input type="text" id="taskId" name="taskId" required></td>
-                </tr>
                 <tr>
                     <td><label for="taskName">Task Name:</label></td>
                     <td><input type="text" id="taskName" name="taskName" required></td>

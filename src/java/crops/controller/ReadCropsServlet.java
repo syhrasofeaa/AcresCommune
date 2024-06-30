@@ -5,7 +5,7 @@
  */
 package crops.controller;
 
-import crops.bean.ReadCropsBean;
+import crops.bean.CropsBean;
 import util.DBConnection;
 
 import java.io.IOException;
@@ -45,14 +45,14 @@ public class ReadCropsServlet extends HttpServlet {
                 conn = DBConnection.createConnection(); // Assuming DBConnection class is implemented
 
                 String readQuery = "SELECT C.CROPID, C.CROPNAME, C.CROPTYPE, C.PLANTINGDATE, C.PLANTINGDATE, C.HARVESTDATE " +
-                                   "FROM CROP C INNER JOIN FARMER F ON C.FARMERID = F.FARMERID WHERE FARMERUSERNAME = ? ";
+                                   "FROM CROP C INNER JOIN FARMER FR ON C.FARMERID = FR.FARMERID WHERE FARMERUSERNAME = ? ";
                 stmt = conn.prepareStatement(readQuery);
                 stmt.setString(1, farmerUsername);
 
                 rs = stmt.executeQuery();
 
                 // Initialize a ReadProfileBean object to hold the data
-                ReadCropsBean readcropsBean = new ReadCropsBean();
+                CropsBean readcropsBean = new CropsBean();
 
                 if (rs.next()) {
                     // Set data to the ReadProfileBean object

@@ -6,7 +6,7 @@
 package profile.controller;
 
 import util.DBConnection;
-import profile.bean.UpdateProfileBean;
+import profile.bean.ProfileBean;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,9 +30,9 @@ public class UpdateProfileServlet extends HttpServlet {
 
         // Get the username from session
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("username");
+        String farmerUsername = (String) session.getAttribute("username");
 
-        if (username != null) {
+        if (farmerUsername != null) {
             Connection conn = null;
             PreparedStatement stmt = null;
             ResultSet rs = null;
@@ -42,24 +42,24 @@ public class UpdateProfileServlet extends HttpServlet {
 
                 String readQuery = "SELECT * FROM FARMER WHERE FARMERUSERNAME = ?";
                 stmt = conn.prepareStatement(readQuery);
-                stmt.setString(1, username);
+                stmt.setString(1, farmerUsername);
 
                 rs = stmt.executeQuery();
 
                 // Initialize a ReadProfileBean object to hold the data
-                UpdateProfileBean profileBean = new UpdateProfileBean();
+                ProfileBean readprofileBean = new ProfileBean();
 
                 if (rs.next()) {
                     // Set data to the ReadProfileBean object
-                    profileBean.setFarmerID(rs.getString("FARMERID"));
-                    profileBean.setName(rs.getString("FARMERNAME"));
-                    profileBean.setPassword(rs.getString("PASSWORD"));
-                    profileBean.setEmail(rs.getString("EMAIL"));
-                    profileBean.setUsername(rs.getString("FARMERUSERNAME"));
+                    readprofileBean.setFarmerID(rs.getString("FARMERID"));
+                    readprofileBean.setName(rs.getString("FARMERNAME"));
+                    readprofileBean.setPassword(rs.getString("PASSWORD"));
+                    readprofileBean.setEmail(rs.getString("EMAIL"));
+                    readprofileBean.setUsername(rs.getString("FARMERUSERNAME"));
                 }
 
                 // Set the profileBean as an attribute
-                request.setAttribute("profileBean", profileBean);
+                request.setAttribute("readprofileBean", readprofileBean);
 
                 // Forward the request to readprofile.jsp
                 request.getRequestDispatcher("updateprofile.jsp").forward(request, response);
@@ -89,28 +89,56 @@ public class UpdateProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("username");
+        String farmerUsername = (String) session.getAttribute("username");
         
-        if (username != null) {
-            String farmerID = request.getParameter("farmerID");
+        if (farmerUsername != null) {
             String name = request.getParameter("fullName");
             String password = request.getParameter("Password");
             String email = request.getParameter("Email");
             String userName = request.getParameter("Username"); // Readonly
             
+            ProfileBean updateprofileBean = new ProfileBean ();
+            updateprofileBean.setName(name);
+            updateprofileBean.setPassword(password);
+            updateprofileBean.setEmail(email);
+            updateprofileBean.setUsername(userName);
+            
             Connection conn = null;
             PreparedStatement stmt = null;
+            ResultSet rs = null;
 
+            
             try {
                 conn = DBConnection.createConnection(); // Assuming DBConnection class is implemented
+                
+                // Query to fetch FARMERID and FARMID based on farmerUsername
+            String query = "SELECT FARMERID FROM FARMER WHERE FARMERUSERNAME = ?";
+            
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, farmerUsername);
+            rs = stmt.executeQuery();
 
+            String farmerId = null;
+
+            if (rs.next()) {
+                farmerId = rs.getString("FARMERID");
+            } else {
+                // Handle case where farmerUsername does not exist or is not associated with a farm
+                request.setAttribute("errorMessage", "Could not find farmer details.");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+                return;
+                
+            }
+            
                 String updateQuery = "UPDATE FARMER SET FARMERNAME = ?, PASSWORD = ?, EMAIL = ?, FARMERUSERNAME = ? WHERE FARMERID = ?";
                 stmt = conn.prepareStatement(updateQuery);
                 
-                stmt.setString(1, name);
-                stmt.setString(2, password);
-                stmt.setString(3, email);
-                stmt.setString(4, userName);
+                stmt.setString(1, updateprofileBean.getName());
+                stmt.setString(2, updateprofileBean.getPassword());
+                stmt.setString(3, updateprofileBean.getEmail());
+                stmt.setString(4, updateprofileBean.getUsername());
+                stmt.setString(5, farmerId);
+            
 
                 int rowsAffected = stmt.executeUpdate();
 

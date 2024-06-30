@@ -5,8 +5,7 @@
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="profile.bean.ReadProfileBean" %>
-<%@ page import="crops.bean.UpdateCropsBean" %>
+<%@ page import="crops.bean.CropsBean" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>

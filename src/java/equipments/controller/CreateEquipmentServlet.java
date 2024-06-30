@@ -6,10 +6,12 @@
 package equipments.controller;
 
 import util.DBConnection;
+import equipments.bean.EquipmentBean;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,40 +32,76 @@ public class CreateEquipmentServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        String farmerId = (String) session.getAttribute("username"); // Assuming "username" holds the farmerId
-        String farmId = (String) session.getAttribute("farmId"); // Assuming "farmId" holds the farmId
+        String farmerUsername = (String) session.getAttribute("username"); // Assuming "username" holds the farmerId
 
-        if (farmerId != null && farmId != null) {
-            String EquipmentID = request.getParameter("equipmentId");
-            String EquipmentName = request.getParameter("equipmentName");
-            String EquipmentCondition = request.getParameter("equipmentCondition");
-            String UsedDate = request.getParameter("usedDate");
+        if (farmerUsername != null) {
+            String equipmentName = request.getParameter("equipmentName");
+            String equipmentCondition = request.getParameter("equipmentCondition");
+            String usedDate = request.getParameter("usedDate");
+            
+            EquipmentBean createequipmentBean = new EquipmentBean();
+            createequipmentBean.setEquipmentName(equipmentName);
+            createequipmentBean.setEquipmentCondition(equipmentCondition);
+            createequipmentBean.setUsedDate(usedDate);
 
             Connection conn = null;
             PreparedStatement stmt = null;
+            ResultSet rs = null;
 
             try {
                 conn = DBConnection.createConnection(); // Replace with your DB connection method
+                
+                String query = "SELECT FR.FARMERID " +
+                                "FROM EQUIPMENT E " +
+                                "INNER JOIN FARMER FR ON E.FARMERID = FR.FARMERID " +
+                                "WHERE FR.FARMERUSERNAME = ?";
+            
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, farmerUsername);
+            rs = stmt.executeQuery();
 
-                String insertQuery = "INSERT INTO EQUIPMENT (EQUIPMENTID, EQUIPMENTNAME, EQUIPMENTCONDITION, USEDDATE, FARMERID, FARMID) VALUES (?, ?, ?, ?, ?, ?)";
+            String farmerId = null;
+
+            if (rs.next()) {
+                farmerId = rs.getString("FARMERID");
+            } else {
+                // Handle case where farmerUsername does not exist or is not associated with a farm
+                request.setAttribute("errorMessage", "Could not find farmer details.");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+                return;
+                
+            }
+            
+            String queryMaxId = "SELECT MAX(EQUIPMENTID) AS max_id FROM EQUIPMENT";
+            stmt = conn.prepareStatement(queryMaxId);
+            rs = stmt.executeQuery();
+            String newEquipmentId = "E01"; // Default value if no existing records
+
+            if (rs.next() && rs.getString("max_id") != null) {
+                String currentMaxId = rs.getString("max_id");
+                int currentIdNum = Integer.parseInt(currentMaxId.substring(1));
+                newEquipmentId = "E" + String.format("%02d", currentIdNum + 1);
+            }
+            
+                String insertQuery = "INSERT INTO EQUIPMENT (EQUIPMENTID, EQUIPMENTNAME, EQUIPMENTCONDITION, USEDDATE, FARMERID) VALUES (?, ?, ?, ?, ?)";
                 stmt = conn.prepareStatement(insertQuery);
 
-                stmt.setString(1, EquipmentID);
-                stmt.setString(2, EquipmentName);
-                stmt.setString(3, EquipmentCondition);
-                stmt.setString(4, UsedDate);
+                stmt.setString(1, newEquipmentId);
+                stmt.setString(2, createequipmentBean.getEquipmentName());
+                stmt.setString(3, createequipmentBean.getEquipmentCondition());
+                stmt.setString(4, createequipmentBean.getUsedDate());
                 stmt.setString(5, farmerId);
-                stmt.setString(6, farmId);
+                
 
                 int rowsAffected = stmt.executeUpdate();
 
                 if (rowsAffected > 0) {
                     // Task creation successful
-                    request.setAttribute("successMessage", "Task created successfully.");
-                    request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+                    request.setAttribute("successMessage", "Equipment created successfully.");
+                    request.getRequestDispatcher("home.html").forward(request, response);
                 } else {
                     // Task creation failed
-                    request.setAttribute("errorMessage", "Failed to create task.");
+                    request.setAttribute("errorMessage", "Failed to create tasks.");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
 
@@ -73,6 +111,7 @@ public class CreateEquipmentServlet extends HttpServlet {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             } finally {
                 try {
+                    if (rs != null) rs.close();
                     if (stmt != null) stmt.close();
                     if (conn != null) conn.close();
                 } catch (SQLException e) {
@@ -81,7 +120,7 @@ public class CreateEquipmentServlet extends HttpServlet {
             }
         } else {
             // Redirect to login page if session attributes are not valid
-            request.setAttribute("errorMessage", "You must be logged in to create a task.");
+            request.setAttribute("errorMessage", "You must be logged in to create an equipment.");
             response.sendRedirect("farmerlogin.jsp");
         }
     }

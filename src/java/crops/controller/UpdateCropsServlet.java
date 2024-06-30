@@ -5,7 +5,7 @@
  */
 package crops.controller;
 
-import crops.bean.UpdateCropsBean;
+import crops.bean.CropsBean;
 import util.DBConnection;
 
 import java.io.IOException;
@@ -52,7 +52,7 @@ public class UpdateCropsServlet extends HttpServlet {
                 rs = stmt.executeQuery();
 
                 // Initialize a ReadProfileBean object to hold the data
-                UpdateCropsBean updatecropsBean = new UpdateCropsBean();
+                CropsBean updatecropsBean = new CropsBean();
 
                 if (rs.next()) {
                     // Set data to the ReadProfileBean object

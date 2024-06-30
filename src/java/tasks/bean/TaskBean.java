@@ -12,14 +12,14 @@ package tasks.bean;
 
 import java.io.Serializable;
 
-public class ReadTaskBean implements Serializable {
+public class TaskBean implements Serializable {
     private String taskID;
     private String taskName;
     private String taskDesc;
     private String dueDate;
     private String taskStatus;
     
-    public ReadTaskBean (){
+    public TaskBean (){
         this.taskID = "";
         this.taskName = "";
         this.taskDesc = "";
@@ -27,7 +27,7 @@ public class ReadTaskBean implements Serializable {
         this.taskStatus = "";
     }
 
-    public ReadTaskBean(String taskID, String taskName, String taskDesc, String dueDate, String taskStatus) {
+    public TaskBean(String taskID, String taskName, String taskDesc, String dueDate, String taskStatus) {
         this.taskID = taskID;
         this.taskName = taskName;
         this.taskDesc = taskDesc;

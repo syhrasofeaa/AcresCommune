@@ -5,26 +5,27 @@
  */
 package equipments.bean;
 
-import java.io.Serializable;
-
 /**
  *
  * @author user
  */
-public class CreateEquipmentBean implements Serializable{
+
+import java.io.Serializable;
+
+public class EquipmentBean implements Serializable {
     private String equipmentID;
     private String equipmentName;
     private String equipmentCondition;
     private String usedDate;
     
-    public CreateEquipmentBean() {
+    public EquipmentBean(){
         this.equipmentID = "";
         this.equipmentName = "";
         this.equipmentCondition = "";
         this.usedDate = "";
     }
 
-    public CreateEquipmentBean(String EquipmentID, String EquipmentName, String EquipmentCondition, String UsedDate) {
+    public EquipmentBean(String equipmentID, String equipmentName, String equipmentCondition, String usedDate) {
         this.equipmentID = equipmentID;
         this.equipmentName = equipmentName;
         this.equipmentCondition = equipmentCondition;
@@ -62,6 +63,5 @@ public class CreateEquipmentBean implements Serializable{
     public void setUsedDate(String usedDate) {
         this.usedDate = usedDate;
     }
-    
     
 }

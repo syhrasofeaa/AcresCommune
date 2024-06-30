@@ -5,7 +5,7 @@
  */
 package equipments.controller;
 
-import equipments.bean.ReadEquipmentBean;
+import equipments.bean.EquipmentBean;
 import util.DBConnection;
 
 import java.io.IOException;
@@ -45,14 +45,14 @@ public class ReadEquipmentServlet extends HttpServlet {
                 conn = DBConnection.createConnection(); // Assuming DBConnection class is implemented
 
                 String readQuery = "SELECT E.EQUIPMENTID, E.EQUIPMENTNAME, E.EQUIPMENTCONDITION, E.USEDDATE " +
-                                   "FROM EQUIPMENT E INNER JOIN FARMER F ON E.FARMERID = F.FARMERID WHERE FARMERUSERNAME = ? ";
+                                   "FROM EQUIPMENT E INNER JOIN FARMER FR ON E.FARMERID = FR.FARMERID WHERE FARMERUSERNAME = ? ";
                 stmt = conn.prepareStatement(readQuery);
                 stmt.setString(1, farmerUsername);
 
                 rs = stmt.executeQuery();
 
                 // Initialize a ReadProfileBean object to hold the data
-                ReadEquipmentBean readequipmentBean = new ReadEquipmentBean();
+                EquipmentBean readequipmentBean = new EquipmentBean();
 
                 if (rs.next()) {
                     // Set data to the ReadProfileBean object

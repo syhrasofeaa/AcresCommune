@@ -13,7 +13,7 @@
 
 package profile.controller;
 
-import profile.bean.LoginBean;
+import profile.bean.ProfileBean;
 import util.DBConnection;
 
 
@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
        
         
         // Perform authentication
-        LoginBean loginBean = new LoginBean();
+        ProfileBean loginBean = new ProfileBean();
         loginBean.setUsername(username);
         loginBean.setPassword(password);
         
@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    private boolean authenticateUser(LoginBean loginBean) {
+    private boolean authenticateUser(ProfileBean loginBean) {
         String userName = loginBean.getUsername();
         String password = loginBean.getPassword();
         

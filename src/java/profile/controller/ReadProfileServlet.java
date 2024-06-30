@@ -11,7 +11,7 @@
 package profile.controller;
 
 import util.DBConnection;
-import profile.bean.ReadProfileBean;
+import profile.bean.ProfileBean;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -51,19 +51,19 @@ public class ReadProfileServlet extends HttpServlet {
                 rs = stmt.executeQuery();
 
                 // Initialize a ReadProfileBean object to hold the data
-                ReadProfileBean profileBean = new ReadProfileBean();
+                ProfileBean readprofileBean = new ProfileBean();
 
                 if (rs.next()) {
                     // Set data to the ReadProfileBean object
-                    profileBean.setFarmerID(rs.getString("FARMERID"));
-                    profileBean.setName(rs.getString("FARMERNAME"));
-                    profileBean.setPassword(rs.getString("PASSWORD"));
-                    profileBean.setEmail(rs.getString("EMAIL"));
-                    profileBean.setUsername(rs.getString("FARMERUSERNAME"));
+                    readprofileBean.setFarmerID(rs.getString("FARMERID"));
+                    readprofileBean.setName(rs.getString("FARMERNAME"));
+                    readprofileBean.setPassword(rs.getString("PASSWORD"));
+                    readprofileBean.setEmail(rs.getString("EMAIL"));
+                    readprofileBean.setUsername(rs.getString("FARMERUSERNAME"));
                 }
 
                 // Set the profileBean as an attribute
-                request.setAttribute("profileBean", profileBean);
+                request.setAttribute("readprofileBean", readprofileBean);
 
                 // Forward the request to readprofile.jsp
                 request.getRequestDispatcher("readprofile.jsp").forward(request, response);
