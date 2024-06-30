@@ -29,15 +29,23 @@ public class DBConnection {
             
             try{
                 try{
-                    Class.forName("com.apache.derby.jdbc.ClientDriver");
+                    Class.forName("org.apache.derby.jdbc.ClientDriver");
                 } catch (ClassNotFoundException e){
                     e.printStackTrace();
                 }
                 con = DriverManager.getConnection(url, username, password);
                 System.out.println("Printing Connection object "+ con);
             } catch (Exception e){
-                
-            }
+                e.printStackTrace();
+            } finally {
+                        if (con != null) {
+                            try {
+                                con.close();
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
             return con;
         }
 }

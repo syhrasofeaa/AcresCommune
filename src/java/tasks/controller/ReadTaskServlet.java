@@ -62,7 +62,7 @@ public class ReadTaskServlet extends HttpServlet {
                 }
 
                 request.setAttribute("readtaskBean", readtaskBean);
-                request.getRequestDispatcher("readtask.jsp").forward(request, response);
+                request.getRequestDispatcher("updatetask.jsp").forward(request, response);
 
             } catch (SQLException e) {
                 e.printStackTrace();

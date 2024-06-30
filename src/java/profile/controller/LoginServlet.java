@@ -65,18 +65,18 @@ public class LoginServlet extends HttpServlet {
         boolean isAuthenticated = false;
 
         // JDBC variables
-        Connection conn = null;
+        Connection con = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try {
             
-            conn = DBConnection.createConnection();
+            con = DBConnection.createConnection();
             
             // Prepare the SQL query based on role
             String loginQuery = "SELECT * FROM FARMER WHERE FARMERUSERNAME = ? AND PASSWORD = ?";
             
-            statement = conn.prepareStatement(loginQuery);
+            statement = con.prepareStatement(loginQuery);
             statement.setString(1, userName);
             statement.setString(2, password);
 
@@ -94,7 +94,7 @@ public class LoginServlet extends HttpServlet {
             try {
                 if (resultSet != null) resultSet.close();
                 if (statement != null) statement.close();
-                if (conn != null) conn.close();
+                if (con != null) con.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -27,11 +27,6 @@
     <a href="aboutus.html">About Us</a>
     <a href="logout.jsp">Logout</a>
 </nav>
-
-    <main>
-        <div class="profile-container">
-            <h1>Read Profile</h1>
-            <form id="ReadProfile" action="UpdateProfileServlet" method="get"> <!-- Form for refreshing data -->
 <script>
     // Function to submit the form
     function submitForm() {
@@ -54,6 +49,10 @@
         };
     }
 </script>
+    <main>
+        <div class="profile-container">
+            <h1>Read Profile</h1>
+            <form id="ReadProfile" action="UpdateProfileServlet" method="get"> <!-- Form for refreshing data -->
                 <input type="hidden" name="action" value="load">
             <table>
                 <tbody>
