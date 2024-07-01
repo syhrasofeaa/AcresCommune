@@ -120,5 +120,14 @@
 <footer>
     <p>&copy; 2024 Community Farming Management System. All rights reserved.</p>
 </footer>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+    </script>
 </body>
 </html>

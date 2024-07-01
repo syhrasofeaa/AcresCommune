@@ -6,33 +6,25 @@ import java.sql.SQLException;
 
 public class DBConnection {
     
+    private static final String DB_URL = "jdbc:derby://localhost:1527/AcresCommune;create=true";
+    private static final String DB_USER = "app";
+    private static final String DB_PASSWORD = "app";
+
+    
             public static Connection createConnection(){
             Connection con = null;
-            String url;
-                url = "jdbc:derby://localhost:1527/AcresCommune;create=true";
-            String username ="app";
-            String password = "app";
             
-            try{
-                try{
-                    Class.forName("org.apache.derby.jdbc.ClientDriver");
-                } catch (ClassNotFoundException e){
-                    e.printStackTrace();
-                }
-                con = DriverManager.getConnection(url, username, password);
-                System.out.println("Printing Connection object "+ con);
-            } catch (Exception e){
-                e.printStackTrace();
-            } finally {
-                        if (con != null) {
-                            try {
-                                con.close();
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-            return con;
+             try {
+            Class.forName("org.apache.derby.jdbc.ClientDataSource");
+            con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            System.out.println("Printing Connection object " + con);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        
+        return con;
+    }
 }
 

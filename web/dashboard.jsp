@@ -26,7 +26,6 @@
         <a href="readequipment.jsp">Equipments</a>
         <a href="readcrops.jsp">Crops</a>
     </div>
- 
 </head>
 <body>
     <main>

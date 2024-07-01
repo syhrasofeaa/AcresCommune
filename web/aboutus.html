@@ -1,35 +1,52 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>About Us</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    </head>
-    <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acres Commune</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
     <header>
-        <h1>Welcome to the Acres Commune</h1>
+        <h1>Dashboard</h1>
     </header>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About Us</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
+        <span style="cursor:pointer" onclick="openNav()">&#9776; More</span>
+        <a href="home.html">Home</a>
+        <a href="readprofile.jsp">Profile</a>
+        <a href="dashboard.jsp">Dashboard</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="logout.jsp">Logout</a>
     </nav>
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="EditProfile.html">Manage Farmers</a>
+        <a href="readtask.jsp">Tasks</a>
+        <a href="readequipment.jsp">Equipments</a>
+        <a href="readcrops.jsp">Crops</a>
     </div>
-    
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; More</span>
-
+    <main>
+        <section id="about-us">
+            <h2>About Us</h2>
+            <p>Welcome to Acres Commune, a community farming initiative dedicated to sustainable and organic farming practices. Our mission is to cultivate a healthier community through responsible farming, providing fresh and organic produce while promoting environmental stewardship.</p>
+            <h3>Our Mission</h3>
+            <p>Our mission is to foster a thriving community by growing fresh, organic food and providing educational resources about sustainable agriculture.</p>
+            <h3>Our Vision</h3>
+            <p>We envision a world where communities are empowered to grow their own food sustainably, promoting health and environmental well-being.</p>
+            <h3>Our Values</h3>
+            <ul>
+                <li><strong>Sustainability:</strong> We prioritize environmentally friendly farming practices.</li>
+                <li><strong>Community:</strong> We believe in the power of community collaboration and support.</li>
+                <li><strong>Education:</strong> We provide resources and workshops to educate our community on sustainable farming.</li>
+                <li><strong>Health:</strong> We are dedicated to growing healthy, organic produce for our community.</li>
+            </ul>
+            <h3>Meet Our Team</h3>
+            <p>Our team is composed of dedicated individuals passionate about farming, sustainability, and community engagement.</p>
+            <!-- You can add team member profiles or photos here -->
+        </section>
+    </main>
+</head>
         <script>
         function openNav() {
           document.getElementById("mySidenav").style.width = "250px";
@@ -38,7 +55,6 @@ and open the template in the editor.
         function closeNav() {
           document.getElementById("mySidenav").style.width = "0";
         }
-        
         </script>
     
     <footer>

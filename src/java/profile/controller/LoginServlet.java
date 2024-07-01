@@ -19,7 +19,6 @@ import util.DBConnection;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
@@ -38,7 +37,6 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
        
-        
         // Perform authentication
         ProfileBean loginBean = new ProfileBean();
         loginBean.setUsername(username);

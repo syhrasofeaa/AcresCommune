@@ -9,25 +9,34 @@
 <%@ page import="tasks.bean.TaskBean" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acres Commune - Update Task</title>
+    <title>Acres Commune</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<header>
-    <h1>Welcome to the Acres Commune</h1>
-</header>
-<nav>
-    <a href="home.html">Home</a>
-    <a href="readprofile.jsp">Profile</a>
-    <a href="dashboard.jsp">Dashboard</a>
-    <a href="aboutus.html">About Us</a>
-    <a href="logout.jsp">Logout</a>
-</nav>
+    <header>
+        <h1>Dashboard</h1>
+    </header>
+    <nav>
+        <span style="cursor:pointer" onclick="openNav()">&#9776; More</span>
+        <a href="home.html">Home</a>
+        <a href="readprofile.jsp">Profile</a>
+        <a href="dashboard.jsp">Dashboard</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="logout.jsp">Logout</a>
+    </nav>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="readtask.jsp">Tasks</a>
+        <a href="readequipment.jsp">Equipments</a>
+        <a href="readcrops.jsp">Crops</a>
+    </div>
+</head>
     <script>
     // Function to submit the form
     function submitForm() {
@@ -113,5 +122,14 @@
 <footer>
     <p>&copy; 2024 Community Farming Management System. All rights reserved.</p>
 </footer>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 </body>
 </html>
