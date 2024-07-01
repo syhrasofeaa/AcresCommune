@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acres Commune</title>
-     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <h1>Welcome to the Acres Commune</h1>
     </header>
     <nav>
+        <span style="cursor:pointer" onclick="openNav()">&#9776; More</span>
         <a href="home.html">Home</a>
         <a href="readprofile.jsp">Profile</a>
         <a href="dashboard.jsp">Dashboard</a>
-        <a href="aboutushtml">About Us</a>
+        <a href="aboutus.html">About Us</a>
         <a href="logout.jsp">Logout</a>
     </nav>
     <div id="mySidenav" class="sidenav">
@@ -24,10 +26,14 @@
         <a href="readequipment.jsp">Equipments</a>
         <a href="readcrops.jsp">Crops</a>
     </div>
-    
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; More</span>
-
-        <script>
+    <main>
+        <section class="history">
+            <h2>Our History</h2>
+            <img src="https://i.pinimg.com/originals/ec/94/73/ec9473d61e158d5cacb266c36903ffc1.jpg" alt="History of Acres Commune" style="width:100%;max-width:600px;">
+            <p>Founded in 2010, Acres Commune started as a small group of passionate farmers dedicated to sustainable agriculture. Over the years, it has grown into a thriving community that embraces innovative farming techniques and collaborative efforts. Our mission is to support local agriculture and create a sustainable future for the next generations.</p>
+        </section>
+    </main>
+    <script>
         function openNav() {
           document.getElementById("mySidenav").style.width = "250px";
         }
@@ -35,9 +41,7 @@
         function closeNav() {
           document.getElementById("mySidenav").style.width = "0";
         }
-        
-        </script>
-    
+    </script>
     <footer>
         <p>&copy; 2024 Community Farming Management System. All rights reserved.</p>
     </footer>

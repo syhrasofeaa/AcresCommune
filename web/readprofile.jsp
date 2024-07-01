@@ -5,6 +5,7 @@
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page session="true" %>
 <%@page import="profile.bean.ProfileBean" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -15,28 +16,6 @@
     <title>Acres Commune - Profile</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script>
-    // Function to submit the form
-    function submitForm() {
-        document.getElementById("ReadProfile").submit();
-    }
-
-    // Check if page is opened for the first time using session storage
-    if (sessionStorage.getItem("firstLoad") === null) {
-        // Set session storage to mark the page as loaded
-        sessionStorage.setItem("firstLoad", "true");
-
-        // Execute when the page is opened for the first time
-        window.onload = function() {
-            submitForm();
-        }; 
-    } else if (performance.navigation.type === 1) {
-        // Reload the page normally when refreshed
-        window.onload = function() {
-            submitForm();
-        };
-    }
-</script>
 </head>
 <body>
 <header>
@@ -84,7 +63,28 @@
         </div>
         </div>
     </main>
+ <script>
+    // Function to submit the form
+    function submitForm() {
+        document.getElementById("ReadProfile").submit();
+    }
 
+    // Check if page is opened for the first time using session storage
+    if (sessionStorage.getItem("firstLoad") === null) {
+        // Set session storage to mark the page as loaded
+        sessionStorage.setItem("firstLoad", "true");
+
+        // Execute when the page is opened for the first time
+        window.onload = function() {
+            submitForm();
+        }; 
+    } else if (performance.navigation.type === 1) {
+        // Reload the page normally when refreshed
+        window.onload = function() {
+            submitForm();
+        };
+    }
+</script>
 <footer>
     <p>&copy; 2024 Community Farming Management System. All rights reserved.</p>
 </footer>

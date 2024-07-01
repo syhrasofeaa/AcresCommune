@@ -6,6 +6,14 @@ body {
     background-color: #f4f1e9;
 }
 
+/* Center the login container */
+.login-page {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full height of viewport */
+}
+
 header {
     position: relative;
     background-image: url('https://photos.smugmug.com/Photography/American-Bounty/i-hFnnMbX/0/Kgw67xCFg3xsQJ58VPz5DQPb3M5TbVj3KCg3zPBmg/O/Redbarn%20cornfield%20mist.jpg');
@@ -145,6 +153,7 @@ table tbody tr:nth-child(even) {
 canvas {
     margin-bottom: 50px; /* Adjust the bottom margin to add space between charts */
 }
+
 /* Login page specific styles */
 .login-container {
     background-color: #fff;
@@ -154,7 +163,6 @@ canvas {
     width: 300px; /* Set width of the login container */
     text-align: center; /* Center align content inside */
 }
-
 
 .login-container h2 {
     text-align: center;
@@ -200,3 +208,29 @@ canvas {
 .signup-button:hover {
     background-color: #6abf69;
 }
+
+/* Dashboard Page */
+        .dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            width: 200px;
+        }
+        .chart-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
